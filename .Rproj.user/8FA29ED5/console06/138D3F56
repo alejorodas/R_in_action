@@ -1,0 +1,392 @@
+]0;~/Documents/Libros/R/R_ejercicios/R_in_action[?1034hMacBook-Air-de-alejandro:R_in_action alejandrorodas$ ls
+DescriptiveStatistics			basic_data_management_cap_1_sec_4.r
+R_in_action.Rproj			comparative_density_plots.r
+Rplots.pdf				dot_plot_grouped_sorted.r
+advanced_data_management.r		histograms.r
+bar_plots.r				simple_example_graph.r
+]0;~/Documents/Libros/R/R_ejercicios/R_in_actionMacBook-Air-de-alejandro:R_in_action alejandrorodas$ cd DescriptiveStatistics/
+]0;~/Documents/Libros/R/R_ejercicios/R_in_action/DescriptiveStatisticsMacBook-Air-de-alejandro:DescriptiveStatistics alejandrorodas$ r -f descriptive_statics_sapply.r 
+
+R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> mystats <- function(x, na.omit=FALSE){
++   if (na.omit)
++     x <- x[!is.na(x)]
++   m <- mean(x)
++   n <- length(x)
++   s <- sd(x)
++   skew <- sum((x-m)^3/s^3)/n
++   kurt <- sum((x-m)^4/s^4)/n - 3
++   return(c(n=n, mean=m, stdev=s, skew=skew, kurtosis=kurt))
++ }
+> 
+> 
+> sapply(mtcars[c("mpg", "hp", "wt")], mystats)
+               mpg          hp          wt
+n        32.000000  32.0000000 32.00000000
+mean     20.090625 146.6875000  3.21725000
+stdev     6.026948  68.5628685  0.97845744
+skew      0.610655   0.7260237  0.42314646
+kurtosis -0.372766  -0.1355511 -0.02271075
+> 
+> 
+]0;~/Documents/Libros/R/R_ejercicios/R_in_action/DescriptiveStatisticsMacBook-Air-de-alejandro:DescriptiveStatistics alejandrorodas$ r -f descriptive_statics_sapply.r 
+
+R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> mystats <- function(x, na.omit=FALSE){
++   if (na.omit)
++     x <- x[!is.na(x)]
++   m <- mean(x)
++   n <- length(x)
++   s <- sd(x)
++   skew <- sum((x-m)^3/s^3)/n
++   kurt <- sum((x-m)^4/s^4)/n - 3
++   return(c(n=n, mean=m, stdev=s, skew=skew, kurtosis=kurt))
++ }
+> 
+> 
+> x <- sapply(mtcars[c("mpg", "hp", "wt")], mystats)
+> x
+               mpg          hp          wt
+n        32.000000  32.0000000 32.00000000
+mean     20.090625 146.6875000  3.21725000
+stdev     6.026948  68.5628685  0.97845744
+skew      0.610655   0.7260237  0.42314646
+kurtosis -0.372766  -0.1355511 -0.02271075
+> 
+> 
+> 
+]0;~/Documents/Libros/R/R_ejercicios/R_in_action/DescriptiveStatisticsMacBook-Air-de-alejandro:DescriptiveStatistics alejandrorodas$ r -f descriptive_statics_sapply.r 
+
+R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> mystats <- function(x, na.omit=FALSE){
++   if (na.omit)
++     x <- x[!is.na(x)]
++   m <- mean(x)
++   n <- length(x)
++   s <- sd(x)
++   skew <- sum((x-m)^3/s^3)/n
++   kurt <- sum((x-m)^4/s^4)/n - 3
++   return(c(n=n, mean=m, stdev=s, skew=skew, kurtosis=kurt))
++ }
+> 
+> 
+> x <- sapply(mtcars[c("mpg", "hp", "wt")], mystats)
+> x$mean
+Error in x$mean : $ operator is invalid for atomic vectors
+Execution halted
+]0;~/Documents/Libros/R/R_ejercicios/R_in_action/DescriptiveStatisticsMacBook-Air-de-alejandro:DescriptiveStatistics alejandrorodas$ r -f descriptive_statics_sapply.r 
+
+R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> mystats <- function(x, na.omit=FALSE){
++   if (na.omit)
++     x <- x[!is.na(x)]
++   m <- mean(x)
++   n <- length(x)
++   s <- sd(x)
++   skew <- sum((x-m)^3/s^3)/n
++   kurt <- sum((x-m)^4/s^4)/n - 3
++   return(c(n=n, mean=m, stdev=s, skew=skew, kurtosis=kurt))
++ }
+> 
+> 
+> x <- sapply(mtcars[c("mpg", "hp", "wt")], mystats)
+> x$mpg
+Error in x$mpg : $ operator is invalid for atomic vectors
+Execution halted
+]0;~/Documents/Libros/R/R_ejercicios/R_in_action/DescriptiveStatisticsMacBook-Air-de-alejandro:DescriptiveStatistics alejandrorodas$ r -f descriptive_statics_sapply.r 
+
+R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> mystats <- function(x, na.omit=FALSE){
++   if (na.omit)
++     x <- x[!is.na(x)]
++   m <- mean(x)
++   n <- length(x)
++   s <- sd(x)
++   skew <- sum((x-m)^3/s^3)/n
++   kurt <- sum((x-m)^4/s^4)/n - 3
++   return(c(n=n, mean=m, stdev=s, skew=skew, kurtosis=kurt))
++ }
+> 
+> 
+> x <- sapply(mtcars[c("mpg", "hp", "wt")], mystats)
+> x_data <- data.frame(x)
+> 
+> 
+> 
+]0;~/Documents/Libros/R/R_ejercicios/R_in_action/DescriptiveStatisticsMacBook-Air-de-alejandro:DescriptiveStatistics alejandrorodas$ r -f descriptive_statics_sapply.r 
+
+R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> mystats <- function(x, na.omit=FALSE){
++   if (na.omit)
++     x <- x[!is.na(x)]
++   m <- mean(x)
++   n <- length(x)
++   s <- sd(x)
++   skew <- sum((x-m)^3/s^3)/n
++   kurt <- sum((x-m)^4/s^4)/n - 3
++   return(c(n=n, mean=m, stdev=s, skew=skew, kurtosis=kurt))
++ }
+> 
+> 
+> x <- sapply(mtcars[c("mpg", "hp", "wt")], mystats)
+> x_data <- data.frame(x)
+> x_data
+               mpg          hp          wt
+n        32.000000  32.0000000 32.00000000
+mean     20.090625 146.6875000  3.21725000
+stdev     6.026948  68.5628685  0.97845744
+skew      0.610655   0.7260237  0.42314646
+kurtosis -0.372766  -0.1355511 -0.02271075
+> 
+> 
+> 
+]0;~/Documents/Libros/R/R_ejercicios/R_in_action/DescriptiveStatisticsMacBook-Air-de-alejandro:DescriptiveStatistics alejandrorodas$ $[Kr -f descriptive_statics_sapply.r 
+
+R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> mystats <- function(x, na.omit=FALSE){
++   if (na.omit)
++     x <- x[!is.na(x)]
++   m <- mean(x)
++   n <- length(x)
++   s <- sd(x)
++   skew <- sum((x-m)^3/s^3)/n
++   kurt <- sum((x-m)^4/s^4)/n - 3
++   return(c(n=n, mean=m, stdev=s, skew=skew, kurtosis=kurt))
++ }
+> 
+> 
+> x <- sapply(mtcars[c("mpg", "hp", "wt")], mystats)
+> x_data <- data.frame(x)
+> x_data$mpg
+[1] 32.000000 20.090625  6.026948  0.610655 -0.372766
+> 
+> 
+> 
+]0;~/Documents/Libros/R/R_ejercicios/R_in_action/DescriptiveStatisticsMacBook-Air-de-alejandro:DescriptiveStatistics alejandrorodas$ r -f descriptive_statics_sapply.r 
+
+R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> mystats <- function(x, na.omit=FALSE){
++   if (na.omit)
++     x <- x[!is.na(x)]
++   m <- mean(x)
++   n <- length(x)
++   s <- sd(x)
++   skew <- sum((x-m)^3/s^3)/n
++   kurt <- sum((x-m)^4/s^4)/n - 3
++   return(c(n=n, mean=m, stdev=s, skew=skew, kurtosis=kurt))
++ }
+> 
+> 
+> x <- sapply(mtcars[c("mpg", "hp", "wt")], mystats)
+> x_data <- data.frame(x)
+> x_data$mean
+NULL
+> 
+> 
+> 
+]0;~/Documents/Libros/R/R_ejercicios/R_in_action/DescriptiveStatisticsMacBook-Air-de-alejandro:DescriptiveStatistics alejandrorodas$ cd ..
+]0;~/Documents/Libros/R/R_ejercicios/R_in_actionMacBook-Air-de-alejandro:R_in_action alejandrorodas$ r -f bar_plots.r 
+
+R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(vcd)
+Loading required package: grid
+> counts <- table(Arthritis$Improved)
+> 
+> counts
+
+  None   Some Marked 
+    42     14     28 
+> #Bar plots display the distribution (frequencies) of a categorical variable through vertical or horizontal bars.
+> barplot(counts,
++         main="Simple Bar Plot",
++         xlab="Improvement", ylab="Frequency")
+> 
+> #If the categorical variable to be plotted is a factor or ordered factor, you can create a vertical bar plot quickly with the plot() function.
+> counts <- factor(Arthritis$Improved)
+> plot(counts, main="Simple Bar Plot",
++                xlab="Improved", ylab="Frequency")
+> 
+> 
+]0;~/Documents/Libros/R/R_ejercicios/R_in_action[?1034hMacBook-Air-de-alejandro:R_in_action alejandrorodas$ pwd
+/Users/alejandrorodas/Documents/Libros/R/R_ejercicios/R_in_action
+]0;~/Documents/Libros/R/R_ejercicios/R_in_actionMacBook-Air-de-alejandro:R_in_action alejandrorodas$ ls
+BasicGraph		DescriptiveStatistics	R_in_action.Rproj
+]0;~/Documents/Libros/R/R_ejercicios/R_in_actionMacBook-Air-de-alejandro:R_in_action alejandrorodas$ cd BasicGraph/
+]0;~/Documents/Libros/R/R_ejercicios/R_in_action/BasicGraphMacBook-Air-de-alejandro:BasicGraph alejandrorodas$ ls[K[Kr -f comparative_density_plots.r 
+
+R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> par(lwd=2)
+> library(sm)
+Error in library(sm) : there is no package called ‘sm’
+Execution halted
+]0;~/Documents/Libros/R/R_ejercicios/R_in_action/BasicGraphMacBook-Air-de-alejandro:BasicGraph alejandrorodas$ 
