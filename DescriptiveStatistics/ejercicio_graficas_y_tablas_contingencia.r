@@ -41,17 +41,14 @@ table.arthritis$color[table.arthritis$Improved=="Some"] <- "darkgreen"
 dotchart(table.arthritis$Age,
          cex=.7,
          pch=19,
-         groups =  table.arthritis$Improved,
+         groups =  table.arthritis$Treatment,
          gcolor = "black",
          color = table.arthritis$color,
-         ylab="Mejoramiento",
+         ylab="Tratamiento",
          xlab = "Edad",
-         main = "Edades de Pacientes vs Tipo de Mejoramiento")
-#Saber la distribucion entre Improved vs Treatment
+         main = "Edades de Pacientes vs Tipo de Tratamiento")
 
-
-
-
-
+mytable <- xtabs(~ Improved+Treatment, data=Arthritis)
+mytable
 
 
