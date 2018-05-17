@@ -555,3 +555,40 @@ Changes not staged for commit:
 
 no changes added to commit (use "git add" and/or "git commit -a")
 ]0;~/Documents/Libros/R/R_ejercicios/R_in_actionMacBook-Air-de-alejandro:R_in_action alejandrorodas$ git ci -am ""t"e"m"p"o"r"a"l"e"s"[C
+[master 2da3303] temporales
+ 12 files changed, 227 insertions(+), 193 deletions(-)
+ rewrite .Rproj.user/8FA29ED5/console06/INDEX001 (87%)
+ delete mode 100644 .Rproj.user/8FA29ED5/sources/s-CB0A3615/63DAD0D2
+ delete mode 100644 .Rproj.user/8FA29ED5/sources/s-CB0A3615/63DAD0D2-contents
+ delete mode 100644 .Rproj.user/8FA29ED5/sources/s-CB0A3615/B5A22E21
+ delete mode 100644 .Rproj.user/8FA29ED5/sources/s-CB0A3615/B5A22E21-contents
+ delete mode 100644 .Rproj.user/8FA29ED5/sources/s-CB0A3615/lock_file
+]0;~/Documents/Libros/R/R_ejercicios/R_in_actionMacBook-Air-de-alejandro:R_in_action alejandrorodas$ gis t[K[K[Kt st
+On branch master
+Your branch is ahead of 'origin/master' by 4 commits.
+  (use "git push" to publish your local commits)
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	[31mmodified:   .Rproj.user/8FA29ED5/console06/138D3F56[m
+
+no changes added to commit (use "git add" and/or "git commit -a")
+]0;~/Documents/Libros/R/R_ejercicios/R_in_actionMacBook-Air-de-alejandro:R_in_action alejandrorodas$ git stci -am "temporales"[K" .Rproj.user
+fatal: Paths with -a does not make sense.
+]0;~/Documents/Libros/R/R_ejercicios/R_in_actionMacBook-Air-de-alejandro:R_in_action alejandrorodas$ git ci -am "temporales" .Rproj.user/
+fatal: Paths with -a does not make sense.
+]0;~/Documents/Libros/R/R_ejercicios/R_in_actionMacBook-Air-de-alejandro:R_in_action alejandrorodas$ git ci -am "temporales" .Rproj.user/[K[K[K[K[K[K[K[K[K[K[K[K.Rproj.user/8FA29ED5/consol e06/138D3F56
+fatal: Paths with -a does not make sense.
+]0;~/Documents/Libros/R/R_ejercicios/R_in_actionMacBook-Air-de-alejandro:R_in_action alejandrorodas$ git st
+On branch master
+Your branch is ahead of 'origin/master' by 4 commits.
+  (use "git push" to publish your local commits)
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	[31mmodified:   .Rproj.user/8FA29ED5/console06/138D3F56[m
+
+no changes added to commit (use "git add" and/or "git commit -a")
+]0;~/Documents/Libros/R/R_ejercicios/R_in_actionMacBook-Air-de-alejandro:R_in_action alejandrorodas$ git stci -am "temporales" .Rproj.user/8FA29ED5/consolee06/138D3F56[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cm "temporales" .Rproj.user/8FA29ED5/console0[1P6/138D3F56[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
