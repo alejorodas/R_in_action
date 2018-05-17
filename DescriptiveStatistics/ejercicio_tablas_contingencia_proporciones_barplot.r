@@ -2,6 +2,7 @@ library(vcd)
 head(Arthritis)
 
 options(digits=2)
+par(mfrow=c(2,2))
 
 # Improved vs Treatment
 # xtabs() function allows you to create a contingency table using formula style input
