@@ -9,6 +9,7 @@ barplot(counts,
 
 #If the categorical variable to be plotted is a factor or ordered factor, you can create a vertical bar plot quickly with the plot() function.
 counts <- factor(Arthritis$Improved)
+counts
 plot(counts, main="Simple Bar Plot",
                xlab="Improved", ylab="Frequency")
 

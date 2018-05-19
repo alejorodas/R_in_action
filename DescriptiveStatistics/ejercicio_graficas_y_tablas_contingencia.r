@@ -1,7 +1,7 @@
 library(vcd)
 head(Arthritis)
 options(digits=2)
-#par(mfrow=c(2,2))
+par(mfrow=c(2,2))
 
 # VAMOS A CREAR DIAGRAMAS DE BARRAS
 
@@ -47,6 +47,8 @@ dotchart(table.arthritis$Age,
          ylab="Tratamiento",
          xlab = "Edad",
          main = "Edades de Pacientes vs Tipo de Tratamiento")
+
+legend(x=23,y=80,legend=c("None", "Marked", "Some"), col = c("red","blue","darkgreen"), pch = 20)
 
 mytable <- xtabs(~ Improved+Treatment, data=Arthritis)
 mytable
