@@ -1,5 +1,5 @@
 par(mfrow=c(2,1))
-custdata <- read.table('/Users/alejandrorodas/Documents/Libros/R/R_ejercicios/PracticalDataScience/custdata.tsv',header=T,sep='\t')
+custdata <- read.table('/Users/alejandrorodas/Documents/Libros/R/R_ejercicios/R_in_action/PracticalDataScience/custdata.tsv',header=T,sep='\t')
 summary(custdata$age)
 
 hist(custdata$age, main = "Density Histogram of Age", freq=FALSE,
