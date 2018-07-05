@@ -2,7 +2,7 @@ library(VIM)
 #library(mice)
 data(sleep, package = "VIM")
 
-#mydata <- read.table("/Users/alejandrorodas/Documents/Libros/R/R_ejercicios/DataCleanning/sleepdata.csv", header=TRUE, sep=";")
+mydata <- read.table("/Users/alejandrorodas/Documents/Libros/R/R_ejercicios/DataCleanning/sleepdata.csv", header=TRUE, sep=";")
 
 # Complete-case analysis (listwise deletion)
 
@@ -13,5 +13,8 @@ data(sleep, package = "VIM")
 
 # The function complete.cases() can be used to save the cases (rows) of a matrix
 # or data frame without missing data:
-
+options(digits=1)
 newdata <- sleep[complete.cases(sleep),]
+cor(na.omit(sleep))
+fit <- lm(Dream ~ Span + Gest, data=na.omit(sleep))
+summary(fit)

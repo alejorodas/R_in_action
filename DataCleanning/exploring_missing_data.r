@@ -15,3 +15,8 @@ head(x, n=5)
 
 y <- x[,sapply(x, sd) > 0] # Select columns with some (but not all) missing values
 cor(y) # Create a correlation matrix: Variables missing together have high correlation
+
+## Rows are observed variables, columns are indicator variables for missingness
+## high correlation means the row variables is strongly correlated with 
+# missingness of the column variable
+cor(sleep, y, use = "pairwise.complete.obs")
