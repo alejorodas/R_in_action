@@ -10,4 +10,4 @@ abline(v=moda, col = "red", lty = 2)
 d <- density(custdata$age)
 plot(d)
 
-summary(Age)
+summary(custdata)
