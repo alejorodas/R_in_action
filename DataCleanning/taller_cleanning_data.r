@@ -1,22 +1,51 @@
-custdata <- sleep[!complete.cases(sleep),]
-head(custdata, n = 5)
+library(VIM)
+data(sleep, package = "VIM")
+
+# Exploring missing data visually
+aggr(sleep, prop=FALSE, numbers=TRUE)
 
 fix.missing <- function(custdata) {
-  if(is.na(custdata$NonD) & !is.na(custdata$Dream) &  !is.na(custdata$ Sleep)){
-    custdata$NonD.fix <- custdata$Sleep - custdata$Dream
+  for (row in 1:nrow(custdata)) {
+    NonD <- custdata[row, "NonD"]
+    Dream <- custdata[row, "Dream"]
+    Sleep <- custdata[row, "Sleep"]
+    
+    #Sleep = Dream + NonD
+    
+    if(is.na(custdata$NonD[row]) && !is.na(custdata$Dream[row]) &&  !is.na(custdata$Sleep[row])){
+      custdata$NonD[row] <- Sleep - Dream
+      print("custdata$NonD.fix")
+    }
+
+    if(is.na(custdata$Dream[row]) && !is.na(custdata$NonD[row]) &&  !is.na(custdata$Sleep[row])){
+      custdata$Dream[row] <- Sleep - NonD
+      print("custdata$Dream.fix")
+    }
+
+    if(is.na(custdata$Sleep[row]) && !is.na(custdata$NonD[row]) &&  !is.na(custdata$Dream[row])){
+      custdata$Sleep[row] <- Dream + NonD
+      print("custdata$Sleep.fix")
+    }
+    
   }
-  
-  if(is.na(custdata$NonD) & !is.na(custdata$Dream) &  !is.na(custdata$ Sleep)){
-    custdata$NonD.fix <- custdata$Sleep - custdata$Dream
-  }
-  
-  if(is.na(custdata$Dream) & !is.na(custdata$NonD) &  !is.na(custdata$Sleep)){
-    custdata$Dream.fix <- custdata$Sleep - custdata$NonD
-  }
+  return(custdata)
 }
 
-# custdata$NonD.fix <- ifelse(is.na(custdata$NonD) & !is.na(custdata$Dream) &  !is.na(custdata$ Sleep),
-#                                    custdata$NonD.fix <- custdata$Sleep - custdata$Dream, "missing")
-x <- sapply(custdata, fix.missing(custdata) )
-head(custdata, n = 5)
+print("Data set casos completos")
+nrow(sleep[complete.cases(sleep),])
+
+custdata <- sleep[!complete.cases(sleep),]
+print("Data set casos incompletos")
+nrow(custdata)
+
+custdata.fix <- fix.missing(custdata)
+
+print("Data set casos completos")
+nrow(custdata.fix[!complete.cases(custdata.fix),])
+is.data.frame(custdata.fix)
+
+
+
+
+
 
