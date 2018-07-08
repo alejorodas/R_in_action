@@ -1,49 +1,34 @@
 library(VIM)
 data(sleep, package = "VIM")
-
-# Exploring missing data visually
-aggr(sleep, prop=FALSE, numbers=TRUE)
+par(mfrow=c(2,1))
 
 fix.missing <- function(custdata) {
   for (row in 1:nrow(custdata)) {
-    NonD <- custdata[row, "NonD"]
-    Dream <- custdata[row, "Dream"]
-    Sleep <- custdata[row, "Sleep"]
     
     #Sleep = Dream + NonD
-    
-    if(is.na(custdata$NonD[row]) && !is.na(custdata$Dream[row]) &&  !is.na(custdata$Sleep[row])){
-      custdata$NonD[row] <- Sleep - Dream
-      print("custdata$NonD.fix")
+ 
+    if(is.na(custdata$Dream[row]) && !is.na(custdata$NonD.fix[row]) &&  !is.na(custdata$Sleep[row])){
+      custdata$Dream[row] <- custdata$Sleep[row] - custdata$NonD.fix[row]
     }
 
-    if(is.na(custdata$Dream[row]) && !is.na(custdata$NonD[row]) &&  !is.na(custdata$Sleep[row])){
-      custdata$Dream[row] <- Sleep - NonD
-      print("custdata$Dream.fix")
-    }
-
-    if(is.na(custdata$Sleep[row]) && !is.na(custdata$NonD[row]) &&  !is.na(custdata$Dream[row])){
-      custdata$Sleep[row] <- Dream + NonD
-      print("custdata$Sleep.fix")
+    if(is.na(custdata$Sleep[row]) && !is.na(custdata$NonD.fix[row]) &&  !is.na(custdata$Dream[row])){
+      custdata$Sleep[row] <- custdata$Dream[row] + custdata$NonD.fix[row]
     }
     
   }
   return(custdata)
 }
 
-print("Data set casos completos")
-nrow(sleep[complete.cases(sleep),])
+# Exploring missing data visually
+aggr(sleep, prop=FALSE, numbers=TRUE)
 
-custdata <- sleep[!complete.cases(sleep),]
-print("Data set casos incompletos")
-nrow(custdata)
+# WHEN VALUES ARE MISSING RANDOMLY
+meanNonD <- mean(sleep$NonD, na.rm = T)
+sleep$NonD.fix <- ifelse(is.na(sleep$NonD), meanNonD, sleep$NonD)
+sleep.fix <- fix.missing(sleep)
 
-custdata.fix <- fix.missing(custdata)
-
-print("Data set casos completos")
-nrow(custdata.fix[!complete.cases(custdata.fix),])
-is.data.frame(custdata.fix)
-
+# Exploring missing data visually with new variable NonD.fix
+aggr(sleep.fix[c("BodyWgt","BrainWgt","NonD.fix","Dream","Sleep","Span", "Gest","Pred", "Exp","Danger")], prop=FALSE, numbers=TRUE)
 
 
 
