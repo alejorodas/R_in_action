@@ -13,3 +13,5 @@ format.Hora <- function(dataset) {
 }
 
 dataset <- format.Hora(data.set.hurto)
+time.tag <- chron(times=c('00:00:00','06:00:00','12:00:00','18:00:00','23:59:00'))
+hurto.inverval <- cut(dataset$hora.hurto,breaks = time.tag, labels = c("Night","Morning","Afernoon","Evening"),include.lowest = TRUE)
