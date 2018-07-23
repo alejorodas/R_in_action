@@ -6,7 +6,9 @@ load(file ="/Users/alejandrorodas/Documents/Libros/R/R_ejercicios/R_in_action/Ar
 
 format.Hora <- function(dataset) {
   Hora <- format(dataset$Hora, format = "%m-%d-%Y %I:%M:%S %p")
-  dataset$hora.hurto <- as.POSIXct(Hora, format = "%m/%d/%Y %I:%M:%S %p")
+  d <- as.POSIXct(Hora, format = "%m/%d/%Y %I:%M:%S %p")
+  dataset$hora.hurto <- substr(d, 12, 19)
+  #dataset$hora.hurto <- format(d, "%I:%M:%S")
   return(dataset)
 }
 
