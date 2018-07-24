@@ -11,6 +11,10 @@ dataset <- format.Hora(data.set.hurto)
 
 #Binding numerical - categorical
 time.tag <- chron(times=c('00:00:00','06:00:00','12:00:00','18:00:00','23:59:00'))
-hurto.inverval <- cut(dataset$hora.hurto,breaks = time.tag, labels = c("Madrugada","Mañana","Tarde","Noche"),include.lowest = TRUE)
+hurto.inverval <- cut(dataset$hora.hurto,breaks = time.tag, labels = c("Night","Ma??ana","Afternoon","Evening"),include.lowest = TRUE)
 
-table(hurto.inverval)
+count <- table(hurto.inverval)
+
+barplot(count, beside = T, main = "Celulares Robados por Hora del D??a",
+        ylab = 'Total de Celulares Robados' , ylim = c(0,max(count)*1.1))
+
