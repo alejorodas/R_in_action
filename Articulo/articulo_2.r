@@ -15,6 +15,7 @@ hurto.inverval <- cut(dataset$hora.hurto,breaks = time.tag, labels = c("Madrugad
 
 count <- table(hurto.inverval)
 count
-barplot(count,ylim = c(0,max(count)*1.1))
+barplot(count,ylim = c(0,max(count)*1.1), main = "Cantidad de Celulares Robados por División del Día",
+        ylab = "Total Celulares Robados")
 box()
 
