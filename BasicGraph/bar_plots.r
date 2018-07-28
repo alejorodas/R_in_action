@@ -1,4 +1,5 @@
 library(vcd)
+par(mfrow=c(2,1))
 counts <- table(Arthritis$Improved)
 
 counts
