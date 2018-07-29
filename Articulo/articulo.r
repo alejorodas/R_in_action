@@ -14,7 +14,15 @@ library(VIM)
 # Hora del hurto
 
 #mydata.tsv <- read.delim("/Users/alejandrorodas/Documents/Libros/R/R_ejercicios/R_in_action/Articulo/Hurto.tsv")
-#hurto.set <- mydata.tsv[c("Día","Hora","MARCA","Sexo","Departamento")]
+mydata.tsv <- read.delim("/Users/alejandrorodas/Documents/Libros/R/R_ejercicios/R_in_action/Articulo/medellin.tsv"
+                         ,col.names = c("Fecha", "Departamento",  "Municipio", "Dia", "Hora",  "Barrio",  "Zona",  "ClaseSitio",  "ArmaEmpleada",  "MovilAgresor" , "MovilVictima",  "Edad",  "Sexo",  "EstadoCivil", "PaisNacimiento",
+                                        "ClaseEmpleado", "Profesion", "Escolaridad", "CodigoDANE",  "CLASE", "MARCA", "LINEA", "Cantidad")
+                         ,encoding = "UTF-8"
+                         ,stringsAsFactors = TRUE)
+
+
+
+#hurto.set <- mydata.tsv[c("D??a","Hora","MARCA","Sexo","Departamento")]
 
 # Se escribe en el archivo hurtoset.tsv el conjunto de datos seleccionado 
 #write_delim(hurto.set, path = "/Users/alejandrorodas/Documents/Libros/R/R_ejercicios/R_in_action/Articulo/hurtoset.tsv",
@@ -35,12 +43,12 @@ fix.Hour <- function(dataset) {
   return(dataset)
 }
 
-# Crear la exploración gráfica de variables perdidas y la summary
+# Crear la exploraci??n gr??fica de variables perdidas y la summary
 # summary(data.set.hurto)
 # aggr(data.set.hurto, prop=FALSE, numbers=TRUE)
 
 # Limpieza de datos
 #data.set.hurto <- fix.Hour(data.set.hurto)
-#save(data.set.hurto, file="/Users/alejandrorodas/Documents/Libros/R/R_ejercicios/R_in_action/Articulo/data.Rda")
-load(file ="/Users/alejandrorodas/Documents/Libros/R/R_ejercicios/R_in_action/Articulo/data.Rda")
-data.set.hurto
+save(data.set.hurto, ascii = TRUE,
+     file="/Users/alejandrorodas/Documents/Libros/R/R_ejercicios/R_in_action/Articulo/hurto.Rda")
+load(file ="/Users/alejandrorodas/Documents/Libros/R/R_ejercicios/R_in_action/Articulo/hurto.Rda")
