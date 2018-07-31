@@ -14,7 +14,7 @@ data.set
 par(mfrow=c(1, 1), mar=c(5, 4, 4, 7))
 barplot(data.set 
         ,beside = T
-        ,main = "Cantidad Celulares Robabos Segun Dia de la Semana y Parte del Dia"
+        ,main = "Cantidad Celulares Robabos Segun Día de la Semana y Parte del Día"
         ,legend = T
         ,ylab = "Total Celulares Robados"
         ,args.legend = list(x = "topright", bty = "n", inset=c(-0.28, 0.20))
