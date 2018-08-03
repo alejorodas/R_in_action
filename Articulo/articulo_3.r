@@ -6,7 +6,7 @@ dias <- factor(data.set.hurto$Dia, order=TRUE,
 d <- data.frame(data.set.hurto$Dia,dias)
 count <- table(data.set.hurto$Dia)[c("Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo")]
 
-# barplot(count,ylim = c(0,max(count)*1.1), main = "Celulares Robados por Dia de la Semana",
+# barplot(count,ylim = c(0,max(count)*1.1), main = "Celulares Robados por Día de la Semana",
 #         ylab = "Total Celulares Robados", 
 #         las = 2,
 #         cex.names = 0.6,
@@ -16,7 +16,7 @@ count <- table(data.set.hurto$Dia)[c("Lunes","Martes","Miercoles","Jueves","Vier
 plot(count,type = "b",ylim = c(0,max(count)*1.2),
      ylab = "Total Celulares Robados")
 
-title(main = "Celulares Robados por Dia de la Semana")
+title(main = "Celulares Robados por Día de la Semana")
 box()
 count
 
