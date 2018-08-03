@@ -1,3 +1,4 @@
+library(chron)
 load(file ="/Users/alejandrorodas/Documents/Libros/R/R_ejercicios/R_in_action/Articulo/hurto.Rda")
 
 # Transforma la hora. Elimina la secci??n correspondiente a la fecha y
