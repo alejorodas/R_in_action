@@ -4,7 +4,7 @@ load(file ="/Users/alejandrorodas/Documents/Libros/R/R_ejercicios/R_in_action/Ar
 
 
 data.set.hurto$parte.dia[(data.set.hurto$hora.hurto >= '00:00:00') & (data.set.hurto$hora.hurto <= '06:00:00')] <- "Madrugada"
-data.set.hurto$parte.dia[(data.set.hurto$hora.hurto > '06:00:00') & (data.set.hurto$hora.hurto <= '12:00:00')] <- "Manana"
+data.set.hurto$parte.dia[(data.set.hurto$hora.hurto > '06:00:00') & (data.set.hurto$hora.hurto <= '12:00:00')] <- "Mañana"
 data.set.hurto$parte.dia[(data.set.hurto$hora.hurto > '12:00:00') & (data.set.hurto$hora.hurto <= '18:00:00')] <- "Tarde"
 data.set.hurto$parte.dia[(data.set.hurto$hora.hurto > '18:00:00') & (data.set.hurto$hora.hurto <= '23:59:00')] <- "Noche"
 
@@ -40,12 +40,12 @@ table.data.set.mujeres <- xtabs(~ parte.dia+Dia, data=data.set.mujeres)
 par(mfrow=c(1, 1), mar=c(5, 4, 4, 7))
 barplot(table.data.set.mujeres[,c("Viernes","Sabado","Domingo")]
         ,beside = T
-        ,main = "Cantidad Celulares Robabos a Mujeres por Intervalo del D??a"
+        ,main = "Cantidad Celulares Robabos a Mujeres por Intervalo del Día"
         ,legend = T
         ,ylab = "Total Celulares Robados"
         ,args.legend = list(x = "topright", bty = "n", inset=c(-0.32, 0.13))
 )
-table.data.set.mujeres
+table.data.set.mujeres[,c("Viernes","Sabado","Domingo")]
 box()
 
 
@@ -57,7 +57,7 @@ table.data.set.hombre <- xtabs(~ parte.dia+Dia, data=data.set.hombre)
 
 barplot(table.data.set.hombre[,c("Viernes","Sabado","Domingo")]
         ,beside = T
-        ,main = "Cantidad Celulares Robabos a Hombres por Intervalo del D??a"
+        ,main = "Cantidad Celulares Robabos a Hombres por Intervalo del Día"
         ,legend = T
         ,ylab = "Total Celulares Robados"
         ,args.legend = list(x = "topright", bty = "n", inset=c(-0.32, 0.13))
