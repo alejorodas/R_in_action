@@ -14,7 +14,7 @@ count <- table(data.set.hurto$Dia)[c("Lunes","Martes","Miercoles","Jueves","Vier
 # 
 
 plot(count,type = "b",ylim = c(0,max(count)*1.2),
-     ylab = "Total Celulares Robados")
+     ylab = "Total Celulares Robados", lty=2, pch=15)
 
 title(main = "Celulares Robados por Día de la Semana")
 box()
