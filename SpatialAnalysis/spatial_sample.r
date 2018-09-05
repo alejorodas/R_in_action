@@ -9,3 +9,5 @@ Census.Data <-read.csv("/Users/alejandrorodas/Documents/Libros/R/R_ejercicios/R_
 head(Output.Areas@data)
 OA.Census <- merge(Output.Areas, Census.Data, by.x="OA11CD", by.y="OA")
 plot(OA.Census)
+
+qtm(OA.Census, fill = "Qualification")
