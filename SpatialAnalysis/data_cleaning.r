@@ -1,3 +1,4 @@
+library(readr)
 library(VIM)
 # Llamar los hurtosa celulares en Risaralda para que pueda ser mapeado
 mydata.tsv <- read.delim("/Users/alejandrorodas/Documents/Libros/R/R_ejercicios/R_in_action/Articulo/Hurto_2.tsv"
@@ -5,7 +6,7 @@ mydata.tsv <- read.delim("/Users/alejandrorodas/Documents/Libros/R/R_ejercicios/
                                         "ClaseEmpleado", "Profesion", "Escolaridad", "CodigoDANE",  "CLASE", "MARCA", "LINEA", "Cantidad")
                          ,encoding = "UTF-8"
                          ,stringsAsFactors = TRUE)
-hurto.set <- mydata.tsv[c("Dia","Hora","MARCA","Sexo","Departamento","Municipio")]
+hurto.set <- mydata.tsv[c("Dia","Hora","MARCA","Sexo","Departamento","Municipio", "Barrio", "Zona")]
 
 # Se escribe en el archivo hurtoset.tsv el conjunto de datos seleccionado 
 write_delim(hurto.set, path = "/Users/alejandrorodas/Documents/Libros/R/R_ejercicios/R_in_action/SpatialAnalysis/hurtoset.tsv",
