@@ -15,6 +15,10 @@ Mapa.pereira$nombre <-  toupper(Mapa.pereira$nombre)
 
 # Convina el ShapeFile de las Comunas en Pereira con la lista de Barrios/Comunas
 Mapa.pereira.comuna.barrio <- merge(Mapa.pereira, barrios.comunas, by.x="nombre", by.y="nombre_comuna",  duplicateGeoms=TRUE)
+writeOGR(Mapa.pereira.comuna.barrio,
+         "/Users/alejandrorodas/Documents/Libros/R/R_ejercicios/R_in_action/SpatialArticulo/MapaPereiraComunaBarrio",
+         'OA.Shape.Mapa.pereira.comuna.barrio',
+        "ESRI Shapefile")
 
 # Convina Barrios/Comunas con los Hurtos en Pereira
 hurto.pereira.comuna.barrio <- merge(hurto.pereira, barrios.comunas, by.x="Barrio", by.y="barrio",  duplicateGeoms=TRUE)
