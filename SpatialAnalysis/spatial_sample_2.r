@@ -16,3 +16,9 @@ plot(houses_1$oseast1m, houses$osnrth1m)
 House.Points <-SpatialPointsDataFrame(houses_1[,3:4], houses_1, proj4string = CRS("+init=EPSG:27700"))
 
 tm_shape(OA.Census) + tm_borders(alpha=.4) + tm_shape(House.Points) + tm_dots(col = "Price", palette = "Reds", style = "quantile")
+
+tm_shape(OA.Census) + tm_fill("Qualification", style = "quantile",
+                              palette = "Reds", legend.hist = TRUE)
+
+tm_shape(OA.Census) + tm_fill("Qualification", style = "equal",
+                              palette = "Reds", legend.hist = TRUE)
