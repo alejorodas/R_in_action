@@ -12,12 +12,9 @@ data.set.pereira <- data.set.hurto[which(data.set.hurto$Municipio == "PEREIRA (C
 
 
 # Aca se muestra el mapa del Departamento de Risaralda
-# pereira.comunas <- Output.Areas$nombre == "Comuna Boston"
+pereira.comunas <- Output.Areas$nombre == "Comuna Boston"
 # plot(Output.Areas,  col = "lightgrey")
 # plot(Output.Areas[which(pereira.comunas), ], col = "turquoise", add = TRUE)
-
-
-
 
 # barrios.pereira <- data.set.codigo.postal.pereira.barrios[3,][, c(4,5)]
 # barrios.pereira$longitud_centroide
@@ -27,9 +24,9 @@ data.set.pereira <- data.set.hurto[which(data.set.hurto$Municipio == "PEREIRA (C
 # barrios.pereira$latitud_centroide <- as.numeric(barrios.pereira$latitud_centroide)
 
 
-barrios.pereira <- data.frame(latitud=c(4-79471354905286), longitud=c(-75-7377321896546))
-barrios.points <-SpatialPointsDataFrame(barrios.pereira[,1:2], barrios.pereira ,
-                                      proj4string = CRS("+init=EPSG:27700"))
+tm_shape(Output.Areas[which(pereira.comunas), ]) + tm_borders(alpha=.4) +
+  tm_fill("area", style = "quantile", n = 7, palette = "Reds")
 
-tm_shape(Output.Areas) + tm_borders(alpha=.4) +
-  tm_shape(barrios.points) + tm_dots(col = "Barrio")
+tm_shape(Output.Areas)  + tm_borders(alpha=.4) +
+  tm_shape(Output.Areas[which(pereira.comunas), ]) + 
+  tm_fill("area", style = "quantile", n = 7, palette = "Reds")
