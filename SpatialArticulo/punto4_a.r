@@ -27,4 +27,4 @@ tm_shape(OA.Shape.pereira.comuna.barrio.hurto)  +
   tm_fill("cantidad.hurto", style = "pretty", palette = "Reds", textNA = "Sin Hurto") +
   tm_borders(alpha=.4)
 
-data.frame.numero.hurto.por.comuna[order(data.frame.numero.hurto.por.comuna$ cantidad.hurto),]
+data.frame.numero.hurto.por.comuna[order(data.frame.numero.hurto.por.comuna$cantidad.hurto),]
