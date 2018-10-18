@@ -22,7 +22,7 @@ OA.Shape.pereira.comuna.barrio.hurto <- merge(OA.Shape.pereira.comuna.barrio, da
 tm_shape(OA.Shape.pereira.comuna.barrio.hurto)  + 
   tm_fill("cantidad.hurto", style = "pretty", palette = "Reds", textNA = "Sin Hurto") +
   tm_borders(alpha=.4)
-data.frame.numero.hurto.por.comuna[order(data.frame.numero.hurto.por.comuna$ cantidad.hurto),]
+data.frame.numero.hurto.por.comuna[order(data.frame.numero.hurto.por.comuna$cantidad.hurto),]
 
 mytable <- with(data.set.hurto.noche, table(tiempo.num))
 plot(mytable, type = "b", las=2,
