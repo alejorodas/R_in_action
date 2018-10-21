@@ -14,15 +14,15 @@ table.set.hurto.noche <- xtabs(~ nombre_comuna+tiempo.num, data=data.set.hurto.n
 numero.hurto.por.comuna <- with(data.set.hurto.noche, table(nombre_comuna))
 data.frame.numero.hurto.por.comuna <- as.data.frame(numero.hurto.por.comuna)
 colnames(data.frame.numero.hurto.por.comuna)[2] <- "cantidad.hurto"
-
+data.frame.numero.hurto.por.comuna <- data.frame.numero.hurto.por.comuna[data.frame.numero.hurto.por.comuna$cantidad.hurto > 1,]
 # Renombrar columnas
 
 OA.Shape.pereira.comuna.barrio.hurto <- merge(OA.Shape.pereira.comuna.barrio, data.frame.numero.hurto.por.comuna, by="nombre", by.y="nombre_comuna")
 
 tm_shape(OA.Shape.pereira.comuna.barrio.hurto)  + 
-  tm_fill("cantidad.hurto", style = "pretty", palette = "Reds", textNA = "Sin Hurto") +
+  tm_fill("cantidad.hurto", style = "pretty", palette = "Reds", textNA = "No Reportado") +
   tm_borders(alpha=.4)
-data.frame.numero.hurto.por.comuna[order(data.frame.numero.hurto.por.comuna$ cantidad.hurto),]
+data.frame.numero.hurto.por.comuna[order(data.frame.numero.hurto.por.comuna$cantidad.hurto),]
 
 
 mytable <- with(data.set.hurto.noche, table(tiempo.num))
