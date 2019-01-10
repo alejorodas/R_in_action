@@ -1,0 +1,211 @@
+---
+title: "Analisis Espacial Hurto Celulares"
+author: "Alejandro Rodas Vásquez"
+output: pdf_document
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+# Introduction
+Usually, most of the published papers don't show the technical details releated with the investigation (like the source code). Therefore, the purpose of this document is share some of the main source code that was the final product of the present investigation.
+
+Also, since the context of this investigation was in Pereria (Colombia) all the variables names are in Spanish.
+
+You can consult the following github repository if you want to know more. <http://rmarkdown.rstudio.com>.
+
+
+## Read of Data Set
+
+```{r warning=FALSE, eval=FALSE}
+library(dplyr)
+
+path<-file.path(getwd(),"DataSet","Hurto.tsv")
+column_names <- c("fecha","departamento","municipio","dia","hora","barrio","zona",
+               "claseDeSitio","armaEmpleada","movilAgresor","movilVictima","edad",
+               "sexo","estadoCivil","paisNacimiento","claseEmpleo","profesion",
+               "escolaridad","codigoDANE","clase","marca","linea","cantidad")
+
+hurto.tsv <- read.delim(path, col.names = column_names,stringsAsFactors = TRUE)
+
+
+#Save the new data set
+save(hurto_colombia_data_set, ascii = TRUE,
+     file = file.path(getwd(),"DataSet","hurto_colombia_data_set.Rda"))
+```
+
+
+## Change Some Data
+
+One of the aims on this project was to analyze the Cell Phone Thefs from the Temporal perpective. To do this, it most be
+imperative transform some data. In the previous analysis of the data set, days like Miercoles (Wednesday) and Sabado (Saturday) are represent with the diferent encoding.
+
+For that reason, the function called dias_transformar was created.
+
+```{r warning=FALSE, eval=FALSE}
+library(dplyr)
+library(tidyverse)
+
+load(file =file.path(getwd(),"DataSet","hurto_colombia_data_set_tbl.Rda"))
+
+dias_transformar <- function(dia) {
+  if(dia == "Mi\303\251rcoles") {
+    return("Miercoles")
+  }
+  if(dia == "S\303\241bado") {
+    return("Sabado")
+  }
+  return(as.character(dia))
+}
+
+hurto_colombia_data_set_tbl$dia_formato <- 
+  sapply(hurto_colombia_data_set_tbl$dia,dias_transformar)
+```
+
+
+## Making Intervals
+
+To make a successfull Temporal Analysis the column that containts time information has to be transform to an POSIXct object. This transformation is required to begin to manipulate Time Series.
+
+
+```{r warning=FALSE, eval=FALSE}
+# Transform days to factor
+hurto_colombia_data_set_tbl$dia_formato <- 
+  factor(hurto_colombia_data_set_tbl$dia_formato,
+        order=TRUE,levels = c("Lunes","Martes","Miercoles",
+                              "Jueves","Viernes","Sabado","Domingo"))
+
+
+# Just simple do some format date field
+hora_format <- as.POSIXct(hurto_colombia_data_set_tbl$hora, format="%m/%d/%Y %I:%M:%S %p")
+hurto_colombia_data_set_tbl$hora_hurto <- format(hora_format, "%H:%M:%S")
+
+# This column is created for store time fields and help to create 
+# the intervals to group the data
+hurto_colombia_data_set_tbl$hora_hurto_time <- times(format(hora_format, "%H:%M:%S"))
+
+# Create intervals
+time.tag <- chron(times=c('00:00:00','06:00:00','12:00:00','18:00:00','23:59:00'))
+hurto_colombia_data_set$hurto_interval <- 
+        cut(hurto_colombia_data_set_tbl$hora_hurto_time,breaks = time.tag, 
+         labels = c("00-06","06-12", "12-18", "18-00"),
+         include.lowest = TRUE)
+
+# Create data set for only Pereira
+hurto_pereira_data_set <- hurto_colombia_data_set_tbl %>% 
+  select("dia_formato","marca","sexo","departamento","municipio",
+        "barrio","hora_hurto","hora_hurto_time","hurto_interval") %>%
+  filter(municipio == "PEREIRA (CT)")
+
+
+save(hurto_pereira_data_set, ascii = TRUE,
+     file = file.path(getwd(),"DataSet","hurto_pereira_data_set_tbl.Rda"))
+
+```
+
+## Some Temporal Analysis
+
+```{r linea_temporal, warning=FALSE,message=FALSE, results='hide'}
+# Generate a time series line geometry diagram to show the Afertoon and Night
+
+library(ggplot2)
+library(dplyr)
+
+load(file =file.path(getwd(),"DataSet","hurto_pereira_data_set_tbl.Rda"))
+
+hurtos_tarde_sabado <- hurto_pereira_data_set %>% 
+  select(dia_formato,hora_hurto,hurto_interval,hora_format_POSIXct) %>%
+  filter(dia_formato=="Sabado", hurto_interval=="12-18"| hurto_interval=="18-00") %>%
+  group_by(hora_format_POSIXct,hurto_interval) %>%
+  summarise(num_hurtos=n()) %>%
+  arrange(hora_format_POSIXct)
+
+hurtos_tarde_sabado
+```
+
+Pueden ver la tabla resultante
+
+
+```{r ref.label='linea_temporal', echo=FALSE}
+```
+
+Linea temporal
+
+```{r warning=FALSE,message=FALSE}
+ggplot(hurtos_tarde_sabado,aes(hora_format_POSIXct,num_hurtos)) +
+  geom_line() +
+  xlab("Day Hour")+
+  scale_y_continuous("",breaks = c(3,6,9,13))
+```
+
+# Spatial Analysis
+
+
+## Doing some mergeing
+
+
+```{r barrios_comunas_data, warning=FALSE,message=FALSE, results='hide'}
+library(tidyverse)
+library(rgdal)
+library(tmap)
+library(sp)
+library(RColorBrewer)
+
+load(file =file.path(getwd(),"DataSet","hurto_pereira_barrio_comuna_data_set_tbl.Rda"))
+barrios.comunas <- read_csv2(file.path(getwd(),"DataSet","comunas_barrios_pereira.csv"),
+                             col_types = cols(
+                               nombre_comuna = col_character(),
+                               barrio = col_character()
+                             ))
+
+glimpse(barrios.comunas)
+```
+
+Data set barrios y comunas
+
+```{r ref.label='barrios_comunas_data', echo=FALSE}
+```
+
+Ahora mostramos la lectura del archivo shape file
+
+```{r warning=FALSE,message=FALSE}
+# Read the shapefile that contains the map of city of Pereira
+Mapa.pereira <- readOGR("/Users/alejandrorodas/Documents/Libros/R/R_ejercicios/R_in_action/SpatialAnalysis/comunas/Comunas_del_municipio_de_Pereira.shp")
+```
+
+Estas son las columnas del DataFrame del objeto SpatialDataFrame
+```{r}
+glimpse(Mapa.pereira@data)
+```
+
+Combina el ShapeFile de las Comunas en Pereira con la lista de Barrios/Comunas
+
+```{r warning=FALSE,message=FALSE, eval=FALSE}
+mapa_pereira_comuna_barrio <- 
+  merge(Mapa.pereira, barrios.comunas, by.x="nombre", by.y="nombre_comuna",  duplicateGeoms=TRUE)
+
+# Guarda shape file Mapa de Comunas de Pereira asociado con los hurtos
+writeOGR(mapa_pereira_comuna_barrio,
+         file.path(getwd(),"DataSet","MapaPereiraComunaBarrioHurto"),
+         'mapa_pereira_comuna_barrio',
+         "ESRI Shapefile")
+```
+
+```{r warning=FALSE,message=FALSE}
+library(rgdal)
+library(tmap)
+library(sp)
+library(RColorBrewer)
+
+mapa_pereira_comuna_barrio <- 
+  readOGR(file.path(getwd(),"DataSet","MapaPereiraComunaBarrioHurto"),'mapa_pereira_comuna_barrio')
+
+tm_shape(mapa_pereira_comuna_barrio) +
+  tm_fill("area",title = "Area",palette ="Greens")
+
+```
